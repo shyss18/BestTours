@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BT.Dom.Entities
 {
@@ -13,5 +14,7 @@ namespace BT.Dom.Entities
         public decimal Price { get; set; }
 
         public DateTime Date { get; set; }
+
+        public ICollection<User> Users { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BT.Common.Enum;
+﻿using System.Collections.Generic;
+using BT.Common.Enum;
 
 namespace BT.Dom.Entities
 {
@@ -13,6 +14,8 @@ namespace BT.Dom.Entities
         public int Age { get; set; }
 
         public string Email { get; set; }
+
+        public ICollection<Tour> Tours { get; set; }
 
         public Roles Role { get; set; }
     }
