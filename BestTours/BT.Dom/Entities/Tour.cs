@@ -17,6 +17,6 @@ namespace BT.Dom.Entities
 
         public DateTime Date { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        public IList<User> Users { get; set; }
     }
 }
