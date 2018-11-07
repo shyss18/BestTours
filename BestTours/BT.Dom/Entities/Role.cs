@@ -1,9 +1,7 @@
-﻿namespace BT.Dom.Entities
-{
-    public class Role
-    {
-        public int Id { get; set; }
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-        public string RoleName { get; set; }
-    }
+namespace BT.Dom.Entities
+{
+    public class Role : IdentityRole
+    { }
 }
