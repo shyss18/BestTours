@@ -1,0 +1,6 @@
+D:\BestTours\BestTours\BT.Common\bin\Debug\BT.Common.dll
+D:\BestTours\BestTours\BT.Common\bin\Debug\BT.Common.pdb
+D:\BestTours\BestTours\BT.Common\obj\Debug\BT.Common.csprojAssemblyReference.cache
+D:\BestTours\BestTours\BT.Common\obj\Debug\BT.Common.csproj.CoreCompileInputs.cache
+D:\BestTours\BestTours\BT.Common\obj\Debug\BT.Common.dll
+D:\BestTours\BestTours\BT.Common\obj\Debug\BT.Common.pdb

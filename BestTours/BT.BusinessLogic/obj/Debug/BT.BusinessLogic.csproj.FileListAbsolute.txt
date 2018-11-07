@@ -1,0 +1,6 @@
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\BT.BusinessLogic.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\BT.BusinessLogic.pdb
+D:\BestTours\BestTours\BT.BusinessLogic\obj\Debug\BT.BusinessLogic.csprojAssemblyReference.cache
+D:\BestTours\BestTours\BT.BusinessLogic\obj\Debug\BT.BusinessLogic.csproj.CoreCompileInputs.cache
+D:\BestTours\BestTours\BT.BusinessLogic\obj\Debug\BT.BusinessLogic.dll
+D:\BestTours\BestTours\BT.BusinessLogic\obj\Debug\BT.BusinessLogic.pdb
