@@ -4,7 +4,7 @@ using BT.DataAccess.Identity;
 
 namespace BT.DataAccess.Interfaces
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         UserManager UserManager { get; }
         IClientManager ClientManager { get; }
