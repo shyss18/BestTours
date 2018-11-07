@@ -6,22 +6,21 @@ namespace BT.DataAccess.Repositories
 {
     public class ClientManager : IClientManager
     {
-        public ApplicationContext DataBase { get; set; }
-
+        public ApplicationContext Database { get; set; }
         public ClientManager(ApplicationContext db)
         {
-            DataBase = db;
+            Database = db;
         }
 
-        public void Create(ClientProfile profile)
+        public void Create(ClientProfile item)
         {
-            DataBase.ClientProfiles.Add(profile);
-            DataBase.SaveChanges();
+            Database.ClientProfiles.Add(item);
+            Database.SaveChanges();
         }
 
         public void Dispose()
         {
-            DataBase.Dispose();
+            Database.Dispose();
         }
     }
 }
