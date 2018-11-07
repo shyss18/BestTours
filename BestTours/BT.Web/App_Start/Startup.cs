@@ -1,5 +1,5 @@
-﻿using BT.Dom.Context;
-using BT.Dom.Manager;
+﻿using BT.BusinessLogic.Interface;
+using BT.BusinessLogic.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -11,15 +11,20 @@ namespace BT.Web.App_Start
 {
     public class Startup
     {
+        IServiceCreator serviceCreator = new ServiceCreator();
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext<ApplicationContext>(ApplicationContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<IUserService>(CreateUserService);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
             });
+        }
+
+        private IUserService CreateUserService()
+        {
+            return serviceCreator.CreateUserService("IdentityDb");
         }
     }
 }
