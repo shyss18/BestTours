@@ -75,13 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\ApplicationContext.cs" />
-    <Compile Include="Entities\RegisterModel.cs" />
+    <Compile Include="Entities\ClientProfile.cs" />
     <Compile Include="Entities\Role.cs" />
-    <Compile Include="Entities\Tour.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
-    <Compile Include="Manager\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
