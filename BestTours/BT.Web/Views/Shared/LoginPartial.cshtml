@@ -1,0 +1,41 @@
+﻿@model BT.Web.Models.LoginModel
+
+<div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Авторизация</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-group" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.NickName, "Никнейм", new { @class = "col-sm-4 col-form-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.NickName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-sm-4 col-form-label" })
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-outline-success active" value="Войти" />
+                        <button type="button" class="btn btn-outline-secondary active" data-dismiss="modal">Отмена</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

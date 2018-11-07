@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
@@ -15,7 +13,7 @@ namespace BT.BusinessLogic.Services
 {
     public class UserService : IUserService
     {
-        private IUnitOfWork Database { get; set; }
+        private IUnitOfWork Database { get; }
 
         public UserService(IUnitOfWork unitOfWork)
         {
@@ -28,7 +26,7 @@ namespace BT.BusinessLogic.Services
 
             if (user == null)
             {
-                user = new User { Email = userDto.Email, UserName = userDto.Name };
+                user = new User { Email = userDto.Email, UserName = userDto.NickName };
 
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
 
@@ -39,7 +37,7 @@ namespace BT.BusinessLogic.Services
 
                 await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
 
-                ClientProfile profile = new ClientProfile { Id = user.Id, Email = userDto.Email, Name = userDto.Name };
+                ClientProfile profile = new ClientProfile { Id = user.Id, Email = userDto.Email, Name = userDto.NickName };
                 Database.ClientManager.Create(profile);
                 await Database.SaveAsync();
 
@@ -47,7 +45,7 @@ namespace BT.BusinessLogic.Services
             }
             else
             {
-                return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                return new OperationDetails(false, "Пользователь с таким email уже существует", "Email");
             }
         }
 
@@ -55,7 +53,7 @@ namespace BT.BusinessLogic.Services
         {
             ClaimsIdentity claims = null;
 
-            User user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+            User user = await Database.UserManager.FindAsync(userDto.NickName, userDto.Password);
 
             if (user != null)
             {
@@ -79,6 +77,18 @@ namespace BT.BusinessLogic.Services
             }
 
             await Create(adminDto);
+        }
+
+        public async Task SetInitialDataAsync()
+        {
+            await SetInitialData(new UserDTO
+            {
+                Email = "admin@gmail.com",
+                Password = "123456",
+                Role = "admin",
+                NickName = "Admin"
+            }, new List<string> { "user", "admin" });
+
         }
 
         public void Dispose()

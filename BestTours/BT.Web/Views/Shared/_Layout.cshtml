@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @Html.RouteLink("Best tours", "MainPage", "Home", new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Туры</a>
+                </li>
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Добавить тур</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link" href="#">О сайте</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary mr-sm-2" data-toggle="modal" data-target="#logIn">Войти</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#register">Регистрация</button>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="btn mr-sm-2">Добро пожаловать, @User.Identity.Name</a>
+                    </li>
+                    <li class="nav-item">
+                        @Html.RouteLink("Выход", "Logout", "Account", new { @class = "btn btn-outline-danger my-2 my-sm-0" })
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    @{Html.RenderPartial("LoginPartial");}
+    @{Html.RenderPartial("RegisterPartial");}
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>
