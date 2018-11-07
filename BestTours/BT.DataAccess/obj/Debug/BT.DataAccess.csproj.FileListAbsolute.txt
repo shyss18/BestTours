@@ -1,0 +1,6 @@
+D:\BestTours\BestTours\BT.DataAccess\bin\Debug\BT.DataAccess.dll
+D:\BestTours\BestTours\BT.DataAccess\bin\Debug\BT.DataAccess.pdb
+D:\BestTours\BestTours\BT.DataAccess\obj\Debug\BT.DataAccess.csprojAssemblyReference.cache
+D:\BestTours\BestTours\BT.DataAccess\obj\Debug\BT.DataAccess.csproj.CoreCompileInputs.cache
+D:\BestTours\BestTours\BT.DataAccess\obj\Debug\BT.DataAccess.dll
+D:\BestTours\BestTours\BT.DataAccess\obj\Debug\BT.DataAccess.pdb
