@@ -1,0 +1,46 @@
+﻿@model BT.Web.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-group" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Name, "Никнейм", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Email, "Почта", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.ConfirmPassword, "Подтверждение пароля", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="container">
+            <input type="submit" class="btn btn-outline-success" value="Регистрация" />
+            @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    }
+</div>
