@@ -6,8 +6,8 @@ namespace BT.DataAccess.Repositories
 {
     public class ClientManager : IClientManager
     {
-        public ApplicationContext Database { get; set; }
-        public ClientManager(ApplicationContext db)
+        public UserContext Database { get; set; }
+        public ClientManager(UserContext db)
         {
             Database = db;
         }

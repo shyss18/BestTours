@@ -15,12 +15,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Туры</a>
+                    @Html.RouteLink("Туры", "AllTours", null, new { @class = "nav-link" })
                 </li>
                 @if (User.IsInRole("admin"))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Добавить тур</a>
+                        @Html.RouteLink("Добавить тур", "AddTour", null, new { @class = "nav-link" })
                     </li>
                 }
                 <li class="nav-item">
@@ -34,10 +34,10 @@
                 @if (!User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        <button class="btn btn-outline-primary mr-sm-2" data-toggle="modal" data-target="#logIn">Войти</button>
+                        @Html.RouteLink("Войти", "Login", null, new { @class = "btn btn-outline-primary mr-sm-2" })
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#register">Регистрация</button>
+                        @Html.RouteLink("Регистрация", "Register", null, new { @class = "btn btn-outline-success my-2 my-sm-0" })
                     </li>
                 }
                 else
@@ -52,10 +52,6 @@
             </ul>
         </div>
     </nav>
-
-    @{Html.RenderPartial("LoginPartial");}
-    @{Html.RenderPartial("RegisterPartial");}
-
     <div class="container body-content">
         @RenderBody()
         <hr />

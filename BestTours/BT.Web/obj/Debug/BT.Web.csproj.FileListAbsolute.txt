@@ -82,8 +82,6 @@ D:\BestTours\BestTours\BT.Web\bin\Microsoft.Owin.Security.dll
 D:\BestTours\BestTours\BT.Web\bin\Microsoft.Owin.Security.OAuth.dll
 D:\BestTours\BestTours\BT.Web\bin\Newtonsoft.Json.dll
 D:\BestTours\BestTours\BT.Web\bin\Ninject.dll
-D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.dll
-D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.WebHost.dll
 D:\BestTours\BestTours\BT.Web\bin\Owin.dll
 D:\BestTours\BestTours\BT.Web\bin\System.Web.Optimization.dll
 D:\BestTours\BestTours\BT.Web\bin\WebGrease.dll
@@ -105,8 +103,8 @@ D:\BestTours\BestTours\BT.Web\bin\Microsoft.Owin.Security.Cookies.xml
 D:\BestTours\BestTours\BT.Web\bin\Microsoft.Owin.Security.OAuth.xml
 D:\BestTours\BestTours\BT.Web\bin\Newtonsoft.Json.xml
 D:\BestTours\BestTours\BT.Web\bin\Ninject.xml
-D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.xml
-D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.WebHost.xml
 D:\BestTours\BestTours\BT.Web\bin\System.Web.Optimization.xml
 D:\BestTours\BestTours\BT.Web\bin\BT.DataAccess.pdb
 D:\BestTours\BestTours\BT.Web\bin\BT.DataAccess.dll.config
+D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.dll
+D:\BestTours\BestTours\BT.Web\bin\Ninject.Web.Common.xml

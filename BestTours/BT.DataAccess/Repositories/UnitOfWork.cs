@@ -14,12 +14,12 @@ namespace BT.DataAccess.Repositories
         public RoleManager RoleManager { get; }
         public IClientManager ClientManager { get; }
 
-        private ApplicationContext _db;
+        private UserContext _db;
         private bool _disposed = false;
 
         public UnitOfWork(string connectionString)
         {
-            _db = new ApplicationContext(connectionString);
+            _db = new UserContext(connectionString);
             UserManager = new UserManager(new UserStore<User>(_db));
             RoleManager = new RoleManager(new RoleStore<Role>(_db));
             ClientManager = new ClientManager(_db);

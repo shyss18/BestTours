@@ -23,6 +23,13 @@ namespace BT.Web.Controllers
             get => HttpContext.GetOwinContext().Authentication;
         }
 
+        [HttpGet]
+        [Route("/Account/Login")]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Route("/Account/Login")]
         [ValidateAntiForgeryToken]
@@ -50,7 +57,7 @@ namespace BT.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Index", "Home", model);
+            return View();
         }
 
         public ActionResult LogOut()
@@ -62,7 +69,7 @@ namespace BT.Web.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View("SuccessRegister");
+            return View();
         }
 
         [HttpPost]
