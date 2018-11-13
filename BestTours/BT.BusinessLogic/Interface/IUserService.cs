@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BT.BusinessLogic.DTO;
@@ -11,7 +10,8 @@ namespace BT.BusinessLogic.Interface
     {
         Task<OperationDetails> Create(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
-        Task SetInitialData(UserDTO adminDto, List<string> roles);
         Task SetInitialDataAsync();
+        UserDTO GetByName(string name);
+        void UpdateUser(UserDTO userDto);
     }
 }

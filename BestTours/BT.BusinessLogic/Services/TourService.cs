@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using BT.BusinessLogic.Interface;
-using BT.DataAccess.Dependency;
 using BT.DataAccess.Interfaces;
-using BT.DataAccess.Repositories;
 using BT.Dom.Entities;
-using Ninject;
 
 namespace BT.BusinessLogic.Services
 {
@@ -12,10 +9,9 @@ namespace BT.BusinessLogic.Services
     {
         private readonly ITourRepository _tourRepository;
 
-        public TourService()
+        public TourService(ITourRepository tourRepository)
         {
-            IKernel kernel = new StandardKernel(new TourDependency());
-            _tourRepository = kernel.Get<TourRepository>();
+            _tourRepository = tourRepository;
         }
 
         public void CreateTour(Tour tour)
