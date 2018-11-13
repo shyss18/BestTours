@@ -34,6 +34,21 @@ namespace BT.Web
                 name: "Register",
                 url: "Account/Register"
             );
+
+            routes.MapRoute(
+                name: "AddTour",
+                url: "Tour/AddTour"
+            );
+
+            routes.MapRoute(
+                name: "AllTours",
+                url: "Tour/Index"
+                );
+
+            routes.MapRoute(
+                name: "Cabinet",
+                url: "Account/Cabinet"
+                );
         }
     }
 }

@@ -77,14 +77,9 @@
   <ItemGroup>
     <Compile Include="Entities\ClientProfile.cs" />
     <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Tour.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BT.Common\BT.Common.csproj">
-      <Project>{52ffbb29-6779-4443-9d3b-b5cab4cfe399}</Project>
-      <Name>BT.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

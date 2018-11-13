@@ -1,0 +1,44 @@
+﻿@model BT.Web.Models.AccountModel
+
+@{
+    ViewBag.Title = "Cabinet";
+}
+
+<div class="container">
+    <div class="form-group">
+        <div class="form-group row">
+            @Html.LabelFor(m => m.NickName, "Никнейм", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.DisplayTextFor(m => m.NickName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.FirstName, "Имя", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.DisplayTextFor(m => m.FirstName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LastName, "Фамилия", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.DisplayTextFor(m => m.LastName)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Email, "Email", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.DisplayTextFor(m => m.Email)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Amount, "Количество валюты", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.DisplayTextFor(m => m.Amount)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.ActionLink("Изменить", "EditAccount", new { name = Model.NickName }, new { @class = "btn btn-outline-success mr-sm-2" })
+            @Html.RouteLink("Назад", "MainPage", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+</div>
