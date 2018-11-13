@@ -44,6 +44,11 @@ namespace BT.Web
                 name: "AllTours",
                 url: "Tour/Index"
                 );
+
+            routes.MapRoute(
+                name: "Cabinet",
+                url: "Account/Cabinet"
+                );
         }
     }
 }
