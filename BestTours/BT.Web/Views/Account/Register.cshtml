@@ -11,6 +11,20 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
+            @Html.LabelFor(m => m.FirstName, "Имя", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.LastName, "Фамилия", new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-3">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
             @Html.LabelFor(m => m.Name, "Никнейм", new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-3">
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })

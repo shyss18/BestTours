@@ -1,0 +1,49 @@
+﻿@model BT.Dom.Entities.Tour
+
+@{
+    ViewBag.Title = "DeleteTour";
+}
+
+<div class="form-group">
+    <div class="lead">
+        Удаление тура
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Name, "Название тура", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-3">
+            @Html.DisplayTextFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Destination, "Путь назначения", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-3">
+            @Html.DisplayTextFor(m => m.Destination)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Price, "Цена", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-3">
+            @Html.DisplayTextFor(m => m.Price)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Date, "Дата отправления", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-3">
+            @Html.DisplayTextFor(m => m.Date)
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(m => m.Description, "Описание", new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-3">
+            @Html.DisplayTextFor(m => m.Description)
+        </div>
+    </div>
+    <div>
+        @using (Html.BeginForm("DeleteTour", "Tour", FormMethod.Post, new { @class = "form-group" }))
+        {
+            <input type="submit" class="btn btn-outline-danger col-sm-2 col-md-2" value="Удалить" />
+            <a href="~/Tour/Index" class="btn btn-outline-secondary col-sm-2 col-md-2">Отмена</a>
+        }
+    </div>
+</div>
+

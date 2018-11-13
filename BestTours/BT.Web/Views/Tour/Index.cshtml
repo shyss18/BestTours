@@ -44,12 +44,19 @@
                 </div>
                 @if (User.IsInRole("admin"))
                 {
-                    <div class="col-sm-2">
-                        <a href="#" class="btn btn-outline-warning">Редактировать</a>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="#" class="btn btn-outline-danger">Удалить</a>
-                    </div>
+                    using (Html.BeginForm("EditTour", "Tour", new { id = tour.Id }, FormMethod.Get))
+                    {
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-outline-warning">Редактировать</button>
+                        </div>
+                    }
+                    using (Html.BeginForm("DeleteTour", "Tour", new { id = tour.Id }, FormMethod.Get))
+                    {
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                        </div>
+                    }
+
                 }
             </div>
         </div>
