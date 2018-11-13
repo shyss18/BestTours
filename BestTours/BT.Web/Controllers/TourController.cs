@@ -1,10 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using BT.BusinessLogic.Dependency;
 using BT.BusinessLogic.Interface;
-using BT.BusinessLogic.Services;
 using BT.Dom.Entities;
-using Ninject;
 
 namespace BT.Web.Controllers
 {
@@ -12,10 +9,9 @@ namespace BT.Web.Controllers
     {
         private readonly ITourService _tourService;
 
-        public TourController()
+        public TourController(ITourService tourService)
         {
-            IKernel kernel = new StandardKernel(new TourServiceDependency());
-            _tourService = kernel.Get<TourService>();
+            _tourService = tourService;
         }
 
         [HttpGet]
