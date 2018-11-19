@@ -13,16 +13,18 @@ namespace BT.DataAccess.Repositories
         public UserManager UserManager { get; }
         public RoleManager RoleManager { get; }
         public IClientManager ClientManager { get; }
+        public ITourRepository TourRepository { get; }
 
-        private UserContext _db;
+        private readonly ApplicationContext _db;
         private bool _disposed = false;
 
         public UnitOfWork(string connectionString)
         {
-            _db = new UserContext(connectionString);
+            _db = new ApplicationContext(connectionString);
             UserManager = new UserManager(new UserStore<User>(_db));
             RoleManager = new RoleManager(new RoleStore<Role>(_db));
             ClientManager = new ClientManager(_db);
+            TourRepository = new TourRepository(_db);
         }
 
         public async Task SaveAsync()
@@ -45,6 +47,7 @@ namespace BT.DataAccess.Repositories
                     UserManager.Dispose();
                     RoleManager.Dispose();
                     ClientManager.Dispose();
+                    TourRepository.Dispose();
                 }
 
                 _disposed = true;
