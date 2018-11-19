@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BT.Dom.Entities;
 
 namespace BT.DataAccess.Interfaces
 {
-    public interface ITourRepository
+    public interface ITourRepository: IDisposable
     {
         void CreateTour(Tour tour);
         void EditTour(Tour tour);

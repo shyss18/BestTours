@@ -8,13 +8,13 @@ using BT.DataAccess.Context;
 
 namespace BT.DataAccess.Repositories
 {
-    public class TourRepository : ITourRepository, IDisposable
+    public class TourRepository : ITourRepository
     {
-        private TourContext _dataBase;
+        private ApplicationContext _dataBase;
 
-        public TourRepository()
+        public TourRepository(ApplicationContext dataBase)
         {
-            _dataBase = new TourContext("IdentityDb");
+            _dataBase = dataBase;
         }
 
         public void CreateTour(Tour tour)
