@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -27,7 +26,7 @@ namespace BT.BusinessLogic.Services
 
             if (user == null)
             {
-                user = new User { Email = userDto.Email, UserName = userDto.NickName, Amount = userDto.Amount, FirstName = userDto.FirstName, LastName = userDto.LastName };
+                user = new User { Email = userDto.Email, UserName = userDto.NickName, Amount = userDto.Amount, FirstName = userDto.FirstName, LastName = userDto.LastName, Tours = userDto.Tours };
 
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
 
@@ -91,7 +90,7 @@ namespace BT.BusinessLogic.Services
             }, new List<string> { "user", "admin" });
         }
 
-        public UserDTO GetByName(string name)
+        public UserDTO GetByNameUserDto(string name)
         {
             var user = Database.UserManager.Users.Where(m => m.UserName == name).Select(m => m).FirstOrDefault();
 
@@ -108,16 +107,15 @@ namespace BT.BusinessLogic.Services
             return userDto;
         }
 
-        public void UpdateUser(UserDTO userDto)
+        public User GetByNameUser(string name)
         {
-            var user = Database.UserManager.FindByNameAsync(userDto.NickName).Result;
+            var user = Database.UserManager.Users.Where(m => m.UserName == name).Select(m => m).FirstOrDefault();
 
-            user.FirstName = userDto.FirstName;
-            user.LastName = userDto.LastName;
-            user.Email = userDto.Email;
-            user.Amount = userDto.Amount;
-            user.UserName = userDto.NickName;
+            return user;
+        }
 
+        public void UpdateUser(User user)
+        {
             Database.UserManager.Update(user);
         }
 

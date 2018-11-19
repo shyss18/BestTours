@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BT.Dom.Entities;
 
 namespace BT.BusinessLogic.Interface
 {
-    public interface ITourService
+    public interface ITourService : IDisposable
     {
         void CreateTour(Tour tour);
         void DeleteTour(int? id);
         void EditTour(Tour tour);
         Tour GetById(int? id);
         IEnumerable<Tour> GetAll();
+        bool BuyTour(Tour tour, string nickName);
     }
 }
