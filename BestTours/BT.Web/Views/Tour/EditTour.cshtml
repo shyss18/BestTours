@@ -1,12 +1,14 @@
 ﻿@model BT.Dom.Entities.Tour
 
 @{
-    ViewBag.Title = "EditTour";
+    ViewBag.Title = "Изменить тур";
+    ViewBag.Favicon = "/Content/icons/editTour/favicon.ico";
 }
 
 <div class="container">
     @using (Html.BeginForm("EditTour", "Tour", FormMethod.Post, new { @class = "form-group" }))
     {
+        @Html.HiddenFor(m => m.Id)
         <div class="form-group row">
             @Html.LabelFor(m => m.Name, "Название тура", new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-3">

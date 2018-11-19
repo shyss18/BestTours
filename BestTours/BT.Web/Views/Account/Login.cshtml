@@ -1,34 +1,60 @@
 ﻿@model BT.Web.Models.LoginModel
 
 @{
-    ViewBag.Title = "Login";
+    Layout = null;
 }
 
-<div class="container">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-group" }))
-    {
-        @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Логин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Content/icons/login/favicon.ico" type="image/x-icon"/>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" align="center">
+        <div class="col-md-3">
+            <h4 class="text-center" style="padding-top: 10%">Вход</h4>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-group needs-validation", @novalidate = true }))
+            {
+                @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(m => m.NickName, "Никнейм", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.NickName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
-            </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(m => m.NickName, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.NickName),
+                        @required = true
+                    })
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(m => m.Password, new
+                    {
+                        @class = "form-control",
+                        @placeholder = @Html.DisplayNameFor(x => x.Password),
+                        @required = true,
+                        @type = "password"
+                    })
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div>
+                    <input type="submit" class="btn btn-outline-primary" value="Войти" />
+                    @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+            }
         </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-
-            </div>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-outline-success" value="Войти" />
-            @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
-        </div>
-    }
-</div>
-
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Content/validation/validation.js"></script>
+</body>
+</html>

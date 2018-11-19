@@ -1,60 +1,128 @@
 ﻿@model BT.Web.Models.RegisterModel
 
 @{
-    ViewBag.Title = "Register";
+    Layout = null;
 }
 
-<div class="container">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-group" }))
-    {
-        @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="shortcut icon" href="~/Content/icons/registrations/favicon.ico" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" align="center">
+        <div class="col-md-3">
+            <h4 class="text-center" style="padding-top: 10%">Регистрация</h4>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-group needs-validation", @novalidate = true }))
+            {
+                @Html.AntiForgeryToken()
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(m => m.FirstName, "Имя", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(model => model.FirstName, new
+                    {
+                        @class = "form-control",
+                        @placeholder = Html.DisplayNameFor(model => model.FirstName),
+                        @required = true
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(model=>model.LastName, new
+                    {
+                        @class="form-control",
+                        @placeholder = Html.DisplayNameFor(model=>model.LastName),
+                        @required = true
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(model=>model.Name, new
+                    {
+                        @class="form-control",
+                        @placeholder = Html.DisplayNameFor(model=>model.Name),
+                        @required = true
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(model => model.Email, new
+                    {
+                        @class="form-control",
+                        @placeholder = Html.DisplayNameFor(model=>model.Email),
+                        @required = true
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(m => m.Password, new
+                    {
+                        @class = "form-control",
+                        @placeholder = Html.DisplayNameFor(model=>model.Password),
+                        @required = true,
+                        @type = "password"
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group row">
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new
+                    {
+                        @class = "form-control",
+                        @placeholder = Html.DisplayNameFor(model => model.ConfirmPassword),
+                        @required = true,
+                        @type = "password"
+                    })
+                    <div class="valid-feedback">
+                        Выглядит хорошо
+                    </div>
+                    <div class="invalid-feedback">
+                        Поле не заполнено!
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="container">
+                    <input type="submit" class="btn btn-outline-success" value="Регистрация" />
+                    @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+            }
         </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.LastName, "Фамилия", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Name, "Никнейм", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Email, "Почта", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.ConfirmPassword, "Подтверждение пароля", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password" })
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="container">
-            <input type="submit" class="btn btn-outline-success" value="Регистрация" />
-            @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
-        </div>
-    }
-</div>
+    </div>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Content/validation/validation.js"></script>
+</body>
+</html>
+

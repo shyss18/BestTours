@@ -1,46 +1,93 @@
 ﻿@model BT.Web.Models.AccountModel
 
 @{
-    ViewBag.Title = "EditAccount";
+    ViewBag.Title = "Редактирование пользователя";
+    ViewBag.Favicon = "/Content/icons/editUser/favicon.ico";
 }
 
-<div class="container">
-    @using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { @class = "form-group" }))
-    {
-        <div class="form-group row">
-            @Html.LabelFor(m => m.NickName, "Никнейм", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.NickName, new { @class = "form-control" })
+<div class="container" align="center">
+    <div class="col-md-3">
+        <h4 class="text-info">Редактирования пользователя:</h4>
+        @using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { @class = "form-group" }))
+        {
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.FirstName, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.FirstName),
+                    @required = true
+                })
+                <div class="valid-feedback">
+                    Выглядит хорошо
+                </div>
+                <div class="invalid-feedback">
+                    Поле не заполнено!
+                </div>
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.FirstName, "Имя", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.LastName, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.LastName),
+                    @required = true
+                })
+                <div class="valid-feedback">
+                    Выглядит хорошо
+                </div>
+                <div class="invalid-feedback">
+                    Поле не заполнено!
+                </div>
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.LastName, "Фамилия", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.NickName, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.NickName),
+                    @required = true
+                })
+                <div class="valid-feedback">
+                    Выглядит хорошо
+                </div>
+                <div class="invalid-feedback">
+                    Поле не заполнено!
+                </div>
+                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Email, "Email", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Email, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Email),
+                    @required = true
+                })
+                <div class="valid-feedback">
+                    Выглядит хорошо
+                </div>
+                <div class="invalid-feedback">
+                    Поле не заполнено!
+                </div>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Amount, "Количество валюты", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" })
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Amount, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Amount),
+                    @required = true
+                })
+                <div class="valid-feedback">
+                    Выглядит хорошо
+                </div>
+                <div class="invalid-feedback">
+                    Поле не заполнено!
+                </div>
             </div>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-outline-warning col-sm-2 col-md-2" value="Изменить" />
-            @Html.RouteLink("Отмена", "Cabinet", new { name = Model.NickName }, new { @class = "btn btn-outline-secondary col-sm-2 col-md-2" })
-        </div>
-    }
+            <div class="container">
+                <input type="submit" class="btn btn-outline-warning" value="Изменить" />
+                @Html.RouteLink("Отмена", "Cabinet", new { name = Model.NickName }, new { @class = "btn btn-outline-secondary " })
+            </div>
+        }
+    </div>
 </div>
-
