@@ -1,4 +1,7 @@
-﻿namespace BT.BusinessLogic.DTO
+﻿using System.Collections.Generic;
+using BT.Dom.Entities;
+
+namespace BT.BusinessLogic.DTO
 {
     public class UserDTO
     {
@@ -9,5 +12,7 @@
         public decimal Amount { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual ICollection<Tour> Tours { get; set; }
     }
 }
