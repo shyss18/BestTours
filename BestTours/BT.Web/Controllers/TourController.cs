@@ -8,10 +8,12 @@ namespace BT.Web.Controllers
     public class TourController : Controller
     {
         private readonly ITourService _tourService;
+        private readonly IUserService _userService;
 
-        public TourController(ITourService tourService)
+        public TourController(ITourService tourService, IUserService userService)
         {
             _tourService = tourService;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -51,8 +53,8 @@ namespace BT.Web.Controllers
             return View(tour);
         }
 
-        [HttpPost, ActionName("EditTour")]
-        public ActionResult EditTourConfirmed(Tour model)
+        [HttpPost]
+        public ActionResult EditTour(Tour model)
         {
             _tourService.EditTour(model);
 
@@ -72,7 +74,7 @@ namespace BT.Web.Controllers
 
             return View(tour);
         }
-        
+
         [HttpPost, ActionName("DeleteTour")]
         public ActionResult DeleteTourConfirmed(int? id)
         {
@@ -84,6 +86,40 @@ namespace BT.Web.Controllers
             _tourService.DeleteTour(id);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "user, admin")]
+        public ActionResult BuyTour(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var tour = _tourService.GetById(id);
+
+            return View(tour);
+        }
+
+        [HttpPost]
+        public ActionResult BuyTour(int? id, string nickName)
+        {
+            if (nickName == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = _tourService.GetById(id);
+
+            //var user = _userService.GetByNameUser(nickName);
+
+            if (_tourService.BuyTour(model, nickName))
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
         }
     }
 }

@@ -6,16 +6,17 @@ using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
 using BT.Web.Models;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 namespace BT.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private IUserService UserService
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
         {
-            get => HttpContext.GetOwinContext().Get<IUserService>();
+            _userService = userService;
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -35,12 +36,12 @@ namespace BT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            await UserService.SetInitialDataAsync();
+            await _userService.SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
                 UserDTO user = new UserDTO { NickName = model.NickName, Password = model.Password };
-                ClaimsIdentity claim = await UserService.Authenticate(user);
+                ClaimsIdentity claim = await _userService.Authenticate(user);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль");
@@ -77,7 +78,7 @@ namespace BT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            await UserService.SetInitialDataAsync();
+            await _userService.SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
@@ -91,7 +92,7 @@ namespace BT.Web.Controllers
                     Role = "user"
                 };
 
-                OperationDetails operationDetails = await UserService.Create(user);
+                OperationDetails operationDetails = await _userService.Create(user);
                 if (operationDetails.Succedeed)
                 {
                     return View("SuccessRegister");
@@ -114,7 +115,7 @@ namespace BT.Web.Controllers
                 return HttpNotFound();
             }
 
-            var user = UserService.GetByName(name);
+            var user = _userService.GetByNameUserDto(name);
 
             AccountModel userAccount = new AccountModel
             {
@@ -137,7 +138,7 @@ namespace BT.Web.Controllers
                 return HttpNotFound();
             }
 
-            var user = UserService.GetByName(name);
+            var user = _userService.GetByNameUserDto(name);
 
             AccountModel account = new AccountModel
             {
@@ -155,18 +156,22 @@ namespace BT.Web.Controllers
         [Route("Account/EditAccount")]
         public ActionResult EditAccount(AccountModel model)
         {
-            UserDTO user = new UserDTO
+            var user = _userService.GetByNameUser(User.Identity.Name);
+
+            if (user != null)
             {
-                NickName = model.NickName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                Amount = model.Amount
-            };
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Amount = model.Amount;
+                user.Email = model.Email;
+                user.UserName = model.NickName;
 
-            UserService.UpdateUser(user);
+                _userService.UpdateUser(user);
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Cabinet", "Account", user.UserName);
+            }
+
+            return View("Error");
         }
     }
 }
