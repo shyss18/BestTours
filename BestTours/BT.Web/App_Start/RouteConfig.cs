@@ -49,6 +49,11 @@ namespace BT.Web
                 name: "Cabinet",
                 url: "Account/Cabinet"
                 );
+
+            routes.MapRoute(
+                name: "BuyTour",
+                url: "Tour/BuyTour"
+                );
         }
     }
 }
