@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BT.Dom.Entities
 {
@@ -15,5 +16,7 @@ namespace BT.Dom.Entities
         public string Destination { get; set; }
 
         public DateTime Date { get; set; }
+
+        public virtual ICollection<User> Users { get; set; }
     }
 }
