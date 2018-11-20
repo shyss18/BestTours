@@ -40,9 +40,9 @@ namespace BT.BusinessLogic.Services
             return _database.TourRepository.GetAll();
         }
 
-        public bool BuyTour(Tour tour, string nickName)
+        public bool BuyTour(Tour tour, string userId)
         {
-            var user = _database.UserManager.FindByNameAsync(nickName).Result;
+            var user = _database.UserManager.FindByIdAsync(userId).Result;
 
             if (user.Amount >= tour.Price)
             {

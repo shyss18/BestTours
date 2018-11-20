@@ -79,6 +79,13 @@ namespace BT.BusinessLogic.Services
             await Create(adminDto);
         }
 
+        public User GetById(string id)
+        {
+            var user = Database.UserManager.FindByIdAsync(id).Result;
+
+            return user;
+        }
+
         public async Task SetInitialDataAsync()
         {
             await SetInitialData(new UserDTO
