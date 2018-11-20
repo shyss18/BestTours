@@ -11,6 +11,6 @@ namespace BT.BusinessLogic.Interface
         void EditTour(Tour tour);
         Tour GetById(int? id);
         IEnumerable<Tour> GetAll();
-        bool BuyTour(Tour tour, string nickName);
+        bool BuyTour(Tour tour, string userId);
     }
 }
