@@ -12,8 +12,7 @@ namespace BT.BusinessLogic.Interface
         Task<OperationDetails> Create(UserDTO userDto);
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         Task SetInitialDataAsync();
-        UserDTO GetByNameUserDto(string name);
-        User GetByNameUser(string name);
+        User GetById(string id);
         void UpdateUser(User user);
     }
 }
