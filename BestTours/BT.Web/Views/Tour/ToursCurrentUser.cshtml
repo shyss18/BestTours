@@ -1,0 +1,17 @@
+﻿@model BT.Dom.Entities.User
+
+@using BT.Dom.Entities
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Туры пользователя " + User.Identity.GetUserName();
+}
+
+<div class="container">
+    @foreach (Tour tour in Model.Tours)
+    {
+        <div>
+            @tour.Name
+        </div>
+    }
+</div>
+
