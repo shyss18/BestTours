@@ -89,7 +89,7 @@ namespace BT.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "user, admin")]
+        [Authorize]
         public ActionResult BuyTour(int? id)
         {
             if (id == null)
@@ -103,23 +103,35 @@ namespace BT.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult BuyTour(int? id, string nickName)
+        public ActionResult BuyTour(int? id, string userId)
         {
-            if (nickName == null)
+            if (userId == null)
             {
                 return HttpNotFound();
             }
 
             var model = _tourService.GetById(id);
 
-            //var user = _userService.GetByNameUser(nickName);
-
-            if (_tourService.BuyTour(model, nickName))
+            if (_tourService.BuyTour(model, userId))
             {
                 return RedirectToAction("Index");
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ToursCurrentUser(string id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound("404");
+            }
+
+            var user = _userService.GetById(id);
+            
+            return View(user);
         }
     }
 }

@@ -6,6 +6,7 @@ using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
 using BT.Web.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace BT.Web.Controllers
@@ -108,18 +109,18 @@ namespace BT.Web.Controllers
 
         [HttpGet]
         [Route("Account/Cabinet")]
-        public ActionResult Cabinet(string name)
+        public ActionResult Cabinet(string id)
         {
-            if (name == null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
 
-            var user = _userService.GetByNameUserDto(name);
+            var user = _userService.GetById(id);
 
             AccountModel userAccount = new AccountModel
             {
-                NickName = user.NickName,
+                NickName = user.UserName,
                 Email = user.Email,
                 Amount = user.Amount,
                 FirstName = user.FirstName,
@@ -131,14 +132,14 @@ namespace BT.Web.Controllers
 
         [HttpGet]
         [Route("Account/EditAccount")]
-        public ActionResult EditAccount(string name)
+        public ActionResult EditAccount(string id)
         {
-            if (name == null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
 
-            var user = _userService.GetByNameUserDto(name);
+            var user = _userService.GetById(id);
 
             AccountModel account = new AccountModel
             {
@@ -146,7 +147,7 @@ namespace BT.Web.Controllers
                 LastName = user.LastName,
                 Amount = user.Amount,
                 Email = user.Email,
-                NickName = user.NickName
+                NickName = user.UserName
             };
 
             return View(account);
@@ -156,7 +157,7 @@ namespace BT.Web.Controllers
         [Route("Account/EditAccount")]
         public ActionResult EditAccount(AccountModel model)
         {
-            var user = _userService.GetByNameUser(User.Identity.Name);
+            var user = _userService.GetById(User.Identity.GetUserId());
 
             if (user != null)
             {
@@ -168,7 +169,7 @@ namespace BT.Web.Controllers
 
                 _userService.UpdateUser(user);
 
-                return RedirectToAction("Cabinet", "Account", user.UserName);
+                return RedirectToAction("Cabinet", "Account", User.Identity.GetUserId());
             }
 
             return View("Error");
