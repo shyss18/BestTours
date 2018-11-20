@@ -1,4 +1,5 @@
-﻿@model BT.Web.Models.AccountModel
+﻿@using Microsoft.AspNet.Identity
+@model BT.Web.Models.AccountModel
 
 @{
     ViewBag.Title = "Cabinet";
@@ -39,14 +40,8 @@
             </div>
         </div>
         <div class="form-group row col-md-auto">
-            @Html.ActionLink("Изменить", "EditAccount", new { name = Model.NickName }, new { @class = "btn btn-outline-warning mr-sm-2" })
+            @Html.ActionLink("Изменить", "EditAccount", new { id = @User.Identity.GetUserId() }, new { @class = "btn btn-outline-warning mr-sm-2" })
             @Html.RouteLink("Назад", "MainPage", null, new { @class = "btn btn-outline-secondary" })
-        </div>
-    </div>
-    <div class="col-md-auto">
-        <h4 class="text-info">Ваши туры:</h4>
-        <div>
-            @{Html.RenderPartial("UserTourPartial");}
         </div>
     </div>
 </div>
