@@ -44,6 +44,13 @@ namespace BT.DataAccess.Repositories
             return tour;
         }
 
+        public Tour FindBy(Func<Tour, bool> predicate)
+        {
+            var tour = _dataBase.Tours.Where(predicate).Select(m => m).FirstOrDefault();
+
+            return tour;
+        }
+
         public IEnumerable<Tour> GetAll()
         {
             return _dataBase.Tours.ToList();
