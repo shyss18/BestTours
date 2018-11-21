@@ -1,6 +1,4 @@
-﻿using BT.BusinessLogic.Interface;
-using BT.BusinessLogic.Services;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
