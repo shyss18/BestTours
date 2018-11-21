@@ -10,6 +10,7 @@ namespace BT.DataAccess.Interfaces
         void EditTour(Tour tour);
         void DeleteTour(int? id);
         Tour GetById(int? id);
+        Tour FindBy(Func<Tour, bool> predicate);
         IEnumerable<Tour> GetAll();
     }
 }

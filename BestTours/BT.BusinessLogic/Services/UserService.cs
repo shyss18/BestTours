@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
 using BT.DataAccess.Interfaces;
+using BT.Dom.DTO;
 using BT.Dom.Entities;
 using Microsoft.AspNet.Identity;
 

@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
+using BT.Dom.DTO;
 using BT.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
