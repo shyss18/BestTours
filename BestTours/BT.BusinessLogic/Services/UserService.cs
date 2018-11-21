@@ -79,6 +79,20 @@ namespace BT.BusinessLogic.Services
             await Create(adminDto);
         }
 
+        public User GetByUserName(string nickName)
+        {
+            var user = Database.UserManager.Users.Where(m => m.UserName == nickName).Select(m => m).FirstOrDefault();
+
+            return user;
+        }
+
+        public User GetByUserEmail(string email)
+        {
+            var user = Database.UserManager.Users.Where(m => m.Email == email).Select(m => m).FirstOrDefault();
+
+            return user;
+        }
+
         public User GetById(string id)
         {
             var user = Database.UserManager.FindByIdAsync(id).Result;
@@ -95,30 +109,6 @@ namespace BT.BusinessLogic.Services
                 Role = "admin",
                 NickName = "Admin"
             }, new List<string> { "user", "admin" });
-        }
-
-        public UserDTO GetByNameUserDto(string name)
-        {
-            var user = Database.UserManager.Users.Where(m => m.UserName == name).Select(m => m).FirstOrDefault();
-
-            UserDTO userDto = new UserDTO
-            {
-                NickName = user.UserName,
-                Email = user.Email,
-                Amount = user.Amount,
-                Password = user.PasswordHash,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
-
-            return userDto;
-        }
-
-        public User GetByNameUser(string name)
-        {
-            var user = Database.UserManager.Users.Where(m => m.UserName == name).Select(m => m).FirstOrDefault();
-
-            return user;
         }
 
         public void UpdateUser(User user)
