@@ -2,7 +2,7 @@
 @model BT.Web.Models.AccountModel
 
 @{
-    ViewBag.Title = "Cabinet";
+    ViewBag.Title = "Личный кабинет пользователя " + User.Identity.GetUserName();
     ViewBag.Favicon = "/Content/icons/cabinet/favicon.ico";
 }
 

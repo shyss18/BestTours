@@ -25,9 +25,12 @@
                         @Html.RouteLink("Добавить тур", "AddTour", null, new { @class = "nav-link" })
                     </li>
                 }
-                <li class="nav-item">
-                    @Html.ActionLink("Ваши туры", "ToursCurrentUser", "Tour", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
-                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Ваши туры", "ToursCurrentUser", "Tour", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
+                    </li>
+                }
                 <li class="nav-item">
                     <a class="nav-link" href="#">О сайте</a>
                 </li>
@@ -48,7 +51,7 @@
                 else
                 {
                     <li class="nav-item">
-                        @Html.RouteLink("Добро пожаловать, " + @User.Identity.Name, "Cabinet", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
+                        @Html.RouteLink("Добро пожаловать, " + @User.Identity.GetUserName(), "Cabinet", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.RouteLink("Выход", "Logout", "Account", new { @class = "btn btn-outline-danger my-2 my-sm-0" })
