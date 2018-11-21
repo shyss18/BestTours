@@ -6,46 +6,48 @@
     ViewBag.Favicon = "/Content/icons/buy/favicon.ico";
 }
 
-<div class="container">
-    @using (Html.BeginForm("BuyTour", "Tour", new { id = Model.Id, userId = User.Identity.GetUserId() }, FormMethod.Post))
-    {
-        @Html.HiddenFor(m => m.Id)
+<div class="container row">
+    <div class="col-md-6">
+        <h4 class="text-info">Покупка тура:</h4>
+        @using (Html.BeginForm("BuyTour", "Tour", new { id = Model.Id, userId = User.Identity.GetUserId() }, FormMethod.Post))
+        {
+            @Html.HiddenFor(m => m.Id)
 
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Name, "Название тура", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.DisplayTextFor(m => m.Name)
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Name, "Название тура:", new { @class = "col-sm-4 col-form-label" })
+                <div class="col-sm-3 col-form-label">
+                    @Html.DisplayTextFor(m => m.Name)
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Destination, "Путь назначения", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.DisplayTextFor(m => m.Destination)
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Destination, "Путь назначения:", new { @class = "col-sm-4 col-form-label" })
+                <div class="col-sm-3 col-form-label">
+                    @Html.DisplayTextFor(m => m.Destination)
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Price, "Цена", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.DisplayTextFor(m => m.Price)
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Price, "Цена:", new { @class = "col-sm-4 col-form-label" })
+                <div class="col-sm-3 col-form-label">
+                    @Html.DisplayTextFor(m => m.Price)
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Date, "Дата отправления", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.DisplayTextFor(m => m.Date)
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Date, "Дата отправления:", new { @class = "col-sm-4 col-form-label" })
+                <div class="col-sm-3 col-form-label">
+                    @Html.DisplayTextFor(m => m.Date)
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Description, "Описание", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.DisplayTextFor(m => m.Description)
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Description, "Описание", new { @class = "col-sm-4 col-form-label" })
+                <div class="col-sm-6 col-form-label">
+                    @Html.DisplayTextFor(m => m.Description)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-outline-success col-sm-2 col-md-2" value="Приобрести" />
-            <a href="~/Tour/Index" class="btn btn-outline-secondary col-sm-2 col-md-2">Отмена</a>
-        </div>
-    }
+            <div class="container">
+                <input type="submit" class="btn btn-outline-success" value="Приобрести" />
+                <a href="~/Tour/Index" class="btn btn-outline-secondary">Отмена</a>
+            </div>
+        }
+    </div>
 </div>
-
 
