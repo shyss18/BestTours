@@ -104,7 +104,7 @@ namespace BT.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Register");
+            return View(model);
         }
 
         [HttpGet]
@@ -146,8 +146,7 @@ namespace BT.Web.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Amount = user.Amount,
-                Email = user.Email,
-                NickName = user.UserName
+                Email = user.Email
             };
 
             return View(account);
@@ -159,20 +158,48 @@ namespace BT.Web.Controllers
         {
             var user = _userService.GetById(User.Identity.GetUserId());
 
-            if (user != null)
+            if (user == null)
+            {
+                return View("Error");
+            }
+
+            if (ModelState.IsValid)
             {
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.Amount = model.Amount;
                 user.Email = model.Email;
-                user.UserName = model.NickName;
 
                 _userService.UpdateUser(user);
 
-                return RedirectToAction("Cabinet", "Account", User.Identity.GetUserId());
+                return RedirectToAction("Cabinet", "Account", new { id = user.Id });
             }
 
-            return View("Error");
+            return View(model);
+        }
+
+        public JsonResult CheckUserName(string Name)
+        {
+            var user = _userService.GetByUserName(Name);
+
+            if (user != null)
+            {
+                return Json("Данный никнейм уже занят", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckUserEmail(string Email)
+        {
+            var user = _userService.GetByUserEmail(Email);
+
+            if (user != null)
+            {
+                return Json("Пользователь с таким адресом уже существует", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }
