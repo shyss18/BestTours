@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace BT.Web.Models
 {
@@ -20,6 +21,7 @@ namespace BT.Web.Models
         public decimal Amount { get; set; }
 
         [Display(Name = "Email")]
+        [Remote("CheckUserEmail", "Account")]
         public string Email { get; set; }
     }
 }

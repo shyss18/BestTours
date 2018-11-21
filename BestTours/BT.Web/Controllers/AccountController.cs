@@ -182,7 +182,7 @@ namespace BT.Web.Controllers
         {
             var user = _userService.GetByUserName(Name);
 
-            if (user != null)
+            if (user != null && user.Id != User.Identity.GetUserId())
             {
                 return Json("Данный никнейм уже занят", JsonRequestBehavior.AllowGet);
             }
@@ -194,7 +194,7 @@ namespace BT.Web.Controllers
         {
             var user = _userService.GetByUserEmail(Email);
 
-            if (user != null)
+            if (user != null & user.Id != User.Identity.GetUserId())
             {
                 return Json("Пользователь с таким адресом уже существует", JsonRequestBehavior.AllowGet);
             }
