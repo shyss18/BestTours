@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNet.Identity
+@model BT.Dom.Entities.Tour
+
+@{
+    ViewBag.Title = "Подробнее о туре " + Model.Name;
+}
+
+<div class="container row">
+    <div class="col-md-6">
+        <h4 class="text-info">Информация о туре:</h4>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Name, "Название тура:", new { @class = "col-sm-4 col-form-label" })
+            <div class="col-sm-3 col-form-label">
+                @Html.DisplayTextFor(m => m.Name)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Destination, "Место назначения:", new { @class = "col-sm-4 col-form-label" })
+            <div class="col-sm-3 col-form-label">
+                @Html.DisplayTextFor(m => m.Destination)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Date, "Дата отправления:", new { @class = "col-sm-4 col-form-label" })
+            <div class="col-sm-3 col-form-label">
+                @Html.DisplayTextFor(m => m.Date)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Price, "Цена:", new { @class = "col-sm-4 col-form-label" })
+            <div class="col-sm-3 col-form-label">
+                @Html.DisplayTextFor(m => m.Price)
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(m => m.Description, "Описание тура:", new { @class = "col-sm-4 col-form-label" })
+            <div class="col-sm-6 col-form-label">
+                @Html.DisplayTextFor(m => m.Description)
+            </div>
+        </div>
+        <div class="container">
+            @Html.RouteLink("Приобрести тур", "BuyTour", new { id = Model.Id, userId = User.Identity.GetUserId() }, new { @class = "btn btn-outline-success" })
+            @Html.RouteLink("Назад", "AllTours", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+    </div>
+    @if (User.IsInRole("admin"))
+    {
+        <div class="col-md-6" style="padding-top: 10%" align="right">
+            @Html.ActionLink("Изменить тур", "EditTour", new { id = Model.Id }, new { @class = "btn btn-outline-warning" })
+            <br />
+            <br />
+            <button type="button" class="btn btn-outline-danger col-sm-3" data-toggle="modal" data-target="#deleteConfirm">Удалить</button>
+
+            @{ Html.RenderPartial("DeleteConfirm", Model); }
+        </div>
+    }
+</div>
+
