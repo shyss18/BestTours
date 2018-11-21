@@ -10,6 +10,7 @@ namespace BT.BusinessLogic.Interface
         void DeleteTour(int? id);
         void EditTour(Tour tour);
         Tour GetById(int? id);
+        Tour FindBy(Func<Tour, bool> predicate);
         IEnumerable<Tour> GetAll();
         bool BuyTour(Tour tour, string userId);
     }

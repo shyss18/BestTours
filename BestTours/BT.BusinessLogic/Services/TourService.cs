@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BT.BusinessLogic.Interface;
 using BT.DataAccess.Interfaces;
 using BT.Dom.Entities;
@@ -33,6 +34,13 @@ namespace BT.BusinessLogic.Services
         public Tour GetById(int? id)
         {
             return _database.TourRepository.GetById(id);
+        }
+
+        public Tour FindBy(Func<Tour, bool> predicate)
+        {
+            var tour = _database.TourRepository.FindBy(predicate);
+
+            return tour;
         }
 
         public IEnumerable<Tour> GetAll()
