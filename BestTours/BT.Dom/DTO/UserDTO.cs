@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using BT.Dom.Entities;
 
-namespace BT.BusinessLogic.DTO
+namespace BT.Dom.DTO
 {
     public class UserDTO
     {
