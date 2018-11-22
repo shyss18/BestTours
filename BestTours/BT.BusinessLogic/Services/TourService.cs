@@ -36,7 +36,7 @@ namespace BT.BusinessLogic.Services
             return _database.TourRepository.GetById(id);
         }
 
-        public Tour FindBy(Func<Tour, bool> predicate)
+        public IEnumerable<Tour> FindBy(Func<Tour, bool> predicate)
         {
             var tour = _database.TourRepository.FindBy(predicate);
 
@@ -57,7 +57,7 @@ namespace BT.BusinessLogic.Services
                 user.Amount = user.Amount - tour.Price;
                 _database.UserManager.Update(user);
                 _database.SaveAsync();
-                
+
                 user.Tours.Add(tour);
                 _database.UserManager.Update(user);
                 _database.SaveAsync();
