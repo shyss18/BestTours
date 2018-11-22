@@ -39,21 +39,21 @@ namespace BT.DataAccess.Repositories
 
         public Tour GetById(int? id)
         {
-            var tour = _dataBase.Tours.Where(m => m.Id == id).Select(m => m).FirstOrDefault();
+            var tour = _dataBase.Tours.Include(t => t.Hotel).FirstOrDefault();
 
             return tour;
         }
 
-        public Tour FindBy(Func<Tour, bool> predicate)
+        public IEnumerable<Tour> FindBy(Func<Tour, bool> predicate)
         {
-            var tour = _dataBase.Tours.Where(predicate).Select(m => m).FirstOrDefault();
+            var tour = _dataBase.Tours.Where(predicate).Select(m => m);
 
             return tour;
         }
 
         public IEnumerable<Tour> GetAll()
         {
-            return _dataBase.Tours.ToList();
+            return _dataBase.Tours.Include(t => t.Hotel);
         }
 
         public void Dispose()
