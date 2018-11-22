@@ -10,11 +10,13 @@ namespace BT.Web.Controllers
     {
         private readonly ITourService _tourService;
         private readonly IUserService _userService;
+        private readonly IHotelService _hotelService;
 
-        public TourController(ITourService tourService, IUserService userService)
+        public TourController(ITourService tourService, IUserService userService, IHotelService hotelService)
         {
             _tourService = tourService;
             _userService = userService;
+            _hotelService = hotelService;
         }
 
         [HttpGet]
@@ -28,6 +30,9 @@ namespace BT.Web.Controllers
         [HttpGet]
         public ActionResult AddTour()
         {
+            SelectList hotels = new SelectList(_hotelService.GetAll(), "Id", "Name");
+            ViewBag.Hotels = hotels;
+
             return View();
         }
 
@@ -41,7 +46,7 @@ namespace BT.Web.Controllers
                 _tourService.CreateTour(model);
 
                 return RedirectToAction("Index", "Tour");
-            }       
+            }
 
             return View(model);
         }
@@ -75,7 +80,7 @@ namespace BT.Web.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost, ActionName("DeleteTour")]
+        [HttpPost]
         public ActionResult DeleteTour(int? id)
         {
             if (id == null)
@@ -130,7 +135,7 @@ namespace BT.Web.Controllers
             }
 
             var user = _userService.GetById(id);
-            
+
             return View(user);
         }
 

@@ -20,10 +20,16 @@
                 <li class="nav-item">
                     @Html.RouteLink("Туры", "AllTours", null, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Гостиницы", "AllHotels", "Hotel", null, new { @class = "nav-link" })
+                </li>
                 @if (User.IsInRole("admin"))
                 {
                     <li class="nav-item">
                         @Html.RouteLink("Добавить тур", "AddTour", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Добавить отель", "CreateHotel", "Hotel", null, new { @class = "nav-link" })
                     </li>
                 }
                 @if (User.Identity.IsAuthenticated)

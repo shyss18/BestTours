@@ -6,6 +6,7 @@
 }
 
 <div class="container">
+    <h4 class="text-center text-info">Туры</h4>
     @foreach (var tour in Model)
     {
         <div class="form-group">
@@ -27,6 +28,17 @@
                 <div class="col-sm-3">
                     @tour.Date
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    Гостиница:
+                </div>
+                @if (tour.Hotel != null)
+                {
+                    <div class="col-sm-3">
+                        @tour.Hotel.Name
+                    </div>
+                }
             </div>
             <div class="row">
                 <div class="col-sm-2">
@@ -55,7 +67,9 @@
                     <div class="col-sm-2">
                         <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirm">Удалить</button>
                     </div>
-                    { Html.RenderPartial("DeleteConfirm", tour); }
+                    {
+                        Html.RenderPartial("DeleteConfirm", tour);
+                    }
                 }
             </div>
         </div>
