@@ -10,6 +10,7 @@ namespace BT.DataAccess.Interfaces
         IClientManager ClientManager { get; }
         RoleManager RoleManager { get; }
         ITourRepository TourRepository { get; }
+        IHotelRepository HotelRepository { get; }
         Task SaveAsync();
     }
 }

@@ -14,6 +14,7 @@ namespace BT.DataAccess.Repositories
         public RoleManager RoleManager { get; }
         public IClientManager ClientManager { get; }
         public ITourRepository TourRepository { get; }
+        public IHotelRepository HotelRepository { get; }
 
         private readonly ApplicationContext _db;
         private bool _disposed = false;
@@ -25,6 +26,7 @@ namespace BT.DataAccess.Repositories
             RoleManager = new RoleManager(new RoleStore<Role>(_db));
             ClientManager = new ClientManager(_db);
             TourRepository = new TourRepository(_db);
+            HotelRepository = new HotelRepository(_db);
         }
 
         public async Task SaveAsync()

@@ -33,5 +33,9 @@ namespace BT.Dom.Entities
         public DateTime Date { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
+
+        public int? HotelId { get; set; }
+
+        public Hotel Hotel { get; set; }
     }
 }

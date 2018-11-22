@@ -10,6 +10,7 @@ namespace BT.DataAccess.Context
         { }
 
         public DbSet<Tour> Tours { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
         public DbSet<ClientProfile> ClientProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -21,6 +22,16 @@ namespace BT.DataAccess.Context
             modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Tours)
+                .WithMany(t => t.Users)
+                .Map(m =>
+                {
+                    m.ToTable("Orders");
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("TourId");
+                });
         }
     }
 }
