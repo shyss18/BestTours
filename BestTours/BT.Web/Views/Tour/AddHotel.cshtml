@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BT.Dom.Entities.Hotel>
+@{
+    ViewBag.Title = "Добавления места пребывания";
+}
+
+<div class="container">
+    <h4 class="text-center text-info">Доступные гостиницы</h4>
+    @foreach (var hotel in Model)
+    {
+        <div class="text-center">
+            @Html.ActionLink(hotel.Name, "Details", "Hotel", new { id = hotel.Id }, new { @class = "btn text-info" })
+        </div>
+        using (Html.BeginForm("AddHotel", "Tour", new { @id = hotel.Id }, FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-outline-success">Добавить гостиницу</button>
+        }
+    }
+</div>
+
