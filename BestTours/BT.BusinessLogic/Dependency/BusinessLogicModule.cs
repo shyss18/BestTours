@@ -4,11 +4,13 @@ using Ninject.Modules;
 
 namespace BT.BusinessLogic.Dependency
 {
-    public class UserServiceModule : NinjectModule
+    public class BusinessLogicModule : NinjectModule
     {
         public override void Load()
         {
+            Bind<ITourService>().To<TourService>();
             Bind<IUserService>().To<UserService>();
+            Bind<IHotelService>().To<HotelService>();
         }
     }
 }
