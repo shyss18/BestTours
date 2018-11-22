@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BT.Dom.Entities.Hotel>
+
+@{
+    ViewBag.Title = "Гостиницы";
+}
+
+<div class="container">
+    <h4 class="text-center text-info">Гостиницы</h4>
+    @foreach (var hotel in Model)
+    {
+        <div class="text-center">
+            @Html.ActionLink(hotel.Name, "Details", "Hotel", new { id = hotel.Id }, new { @class = "btn text-info" })
+        </div>
+    }
+</div>
+

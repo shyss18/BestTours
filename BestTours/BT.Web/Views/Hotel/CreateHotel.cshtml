@@ -1,0 +1,45 @@
+﻿@model BT.Dom.Entities.Hotel
+
+@{
+    ViewBag.Title = "Добавление отеля";
+}
+
+<div class="container" align="center">
+    <div class="col-md-5">
+        <h4 class="text-center text-success" style="padding-top: 10%">Добавление отеля</h4>
+        @using (Html.BeginForm("CreateHotel", "Hotel", FormMethod.Post, new { @class = "form-group", @novalidate = true }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Name, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Name),
+                })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextAreaFor(model => model.Address, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Address),
+                })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Phone, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Phone),
+                })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+            <div class="container">
+                <input type="submit" class="btn btn-outline-success" value="Добавить" />
+                <a href="~/Home/Index" class="btn btn-outline-secondary">Отмена</a>
+            </div>
+        }
+    </div>
+</div>
+
