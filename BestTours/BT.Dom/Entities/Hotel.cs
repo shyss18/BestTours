@@ -10,6 +10,7 @@ namespace BT.Dom.Entities
         public int Id { get; set; }
 
         [Display(Name = "Название отеля")]
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "Поле не заполнено!")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Слишком маленькое название гостиницы")]
         public string Name { get; set; }

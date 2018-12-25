@@ -24,6 +24,7 @@ namespace BT.Dom.Entities
 
         [Required(ErrorMessage = "Поле не заполнено!")]
         [Display(Name = "Место назначения")]
+        [DataType(DataType.Text, ErrorMessage = "Введите текст")]
         public string Destination { get; set; }
 
         [Required(ErrorMessage = "Поле не заполнено!")]
@@ -31,6 +32,11 @@ namespace BT.Dom.Entities
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:dd.MM.yy}", ApplyFormatInEditMode = true)]
         [Remote("ValidateDate", "Tour")]
         public DateTime Date { get; set; }
+
+        [Display(Name = "Продолжительность тура")]
+        [Required(ErrorMessage = "Поле не заполнено!")]
+        [Range(1, 31, ErrorMessage = "Слишком большое значение или отрицательное значение")]
+        public int DayCount { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
 
