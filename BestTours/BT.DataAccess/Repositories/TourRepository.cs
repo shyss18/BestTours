@@ -39,7 +39,7 @@ namespace BT.DataAccess.Repositories
 
         public Tour GetById(int? id)
         {
-            var tour = _dataBase.Tours.Include(t => t.Hotel).FirstOrDefault();
+            var tour = _dataBase.Tours.Include(t => t.Hotel).FirstOrDefault(t => t.Id == id);
 
             return tour;
         }
