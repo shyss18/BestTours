@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Collections.Generic;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BT.Dom.Entities
 {
@@ -11,5 +12,7 @@ namespace BT.Dom.Entities
         public decimal Amount { get; set; }
 
         public virtual ClientProfile ClientProfile { get; set; }
+
+        public virtual ICollection<Tour> Tours { get; set; }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
 using BT.DataAccess.Interfaces;
+using BT.Dom.DTO;
 using BT.Dom.Entities;
 using Microsoft.AspNet.Identity;
 
@@ -27,7 +26,7 @@ namespace BT.BusinessLogic.Services
 
             if (user == null)
             {
-                user = new User { Email = userDto.Email, UserName = userDto.NickName, Amount = userDto.Amount, FirstName = userDto.FirstName, LastName = userDto.LastName };
+                user = new User { Email = userDto.Email, UserName = userDto.NickName, Amount = userDto.Amount, FirstName = userDto.FirstName, LastName = userDto.LastName, Tours = userDto.Tours };
 
                 var result = await Database.UserManager.CreateAsync(user, userDto.Password);
 
@@ -80,6 +79,27 @@ namespace BT.BusinessLogic.Services
             await Create(adminDto);
         }
 
+        public User GetByUserName(string nickName)
+        {
+            var user = Database.UserManager.Users.Where(m => m.UserName == nickName).Select(m => m).FirstOrDefault();
+
+            return user;
+        }
+
+        public User GetByUserEmail(string email)
+        {
+            var user = Database.UserManager.Users.Where(m => m.Email == email).Select(m => m).FirstOrDefault();
+
+            return user;
+        }
+
+        public User GetById(string id)
+        {
+            var user = Database.UserManager.FindByIdAsync(id).Result;
+
+            return user;
+        }
+
         public async Task SetInitialDataAsync()
         {
             await SetInitialData(new UserDTO
@@ -91,33 +111,8 @@ namespace BT.BusinessLogic.Services
             }, new List<string> { "user", "admin" });
         }
 
-        public UserDTO GetByName(string name)
+        public void UpdateUser(User user)
         {
-            var user = Database.UserManager.Users.Where(m => m.UserName == name).Select(m => m).FirstOrDefault();
-
-            UserDTO userDto = new UserDTO
-            {
-                NickName = user.UserName,
-                Email = user.Email,
-                Amount = user.Amount,
-                Password = user.PasswordHash,
-                FirstName = user.FirstName,
-                LastName = user.LastName
-            };
-
-            return userDto;
-        }
-
-        public void UpdateUser(UserDTO userDto)
-        {
-            var user = Database.UserManager.FindByNameAsync(userDto.NickName).Result;
-
-            user.FirstName = userDto.FirstName;
-            user.LastName = userDto.LastName;
-            user.Email = userDto.Email;
-            user.Amount = userDto.Amount;
-            user.UserName = userDto.NickName;
-
             Database.UserManager.Update(user);
         }
 

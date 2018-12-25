@@ -2,20 +2,22 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using BT.BusinessLogic.DTO;
 using BT.BusinessLogic.Infrastructure;
 using BT.BusinessLogic.Interface;
+using BT.Dom.DTO;
 using BT.Web.Models;
-using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace BT.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private IUserService UserService
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
         {
-            get => HttpContext.GetOwinContext().Get<IUserService>();
+            _userService = userService;
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -35,12 +37,12 @@ namespace BT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            await UserService.SetInitialDataAsync();
+            await _userService.SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
                 UserDTO user = new UserDTO { NickName = model.NickName, Password = model.Password };
-                ClaimsIdentity claim = await UserService.Authenticate(user);
+                ClaimsIdentity claim = await _userService.Authenticate(user);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль");
@@ -77,7 +79,7 @@ namespace BT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            await UserService.SetInitialDataAsync();
+            await _userService.SetInitialDataAsync();
 
             if (ModelState.IsValid)
             {
@@ -91,7 +93,7 @@ namespace BT.Web.Controllers
                     Role = "user"
                 };
 
-                OperationDetails operationDetails = await UserService.Create(user);
+                OperationDetails operationDetails = await _userService.Create(user);
                 if (operationDetails.Succedeed)
                 {
                     return View("SuccessRegister");
@@ -102,23 +104,23 @@ namespace BT.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Register");
+            return View(model);
         }
 
         [HttpGet]
         [Route("Account/Cabinet")]
-        public ActionResult Cabinet(string name)
+        public ActionResult Cabinet(string id)
         {
-            if (name == null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
 
-            var user = UserService.GetByName(name);
+            var user = _userService.GetById(id);
 
             AccountModel userAccount = new AccountModel
             {
-                NickName = user.NickName,
+                NickName = user.UserName,
                 Email = user.Email,
                 Amount = user.Amount,
                 FirstName = user.FirstName,
@@ -130,22 +132,21 @@ namespace BT.Web.Controllers
 
         [HttpGet]
         [Route("Account/EditAccount")]
-        public ActionResult EditAccount(string name)
+        public ActionResult EditAccount(string id)
         {
-            if (name == null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
 
-            var user = UserService.GetByName(name);
+            var user = _userService.GetById(id);
 
             AccountModel account = new AccountModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Amount = user.Amount,
-                Email = user.Email,
-                NickName = user.NickName
+                Email = user.Email
             };
 
             return View(account);
@@ -155,18 +156,62 @@ namespace BT.Web.Controllers
         [Route("Account/EditAccount")]
         public ActionResult EditAccount(AccountModel model)
         {
-            UserDTO user = new UserDTO
+            var user = _userService.GetById(User.Identity.GetUserId());
+
+            if (user == null)
             {
-                NickName = model.NickName,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Email = model.Email,
-                Amount = model.Amount
-            };
+                return View("Error");
+            }
 
-            UserService.UpdateUser(user);
+            if (ModelState.IsValid)
+            {
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Amount = model.Amount;
+                user.Email = model.Email;
 
-            return RedirectToAction("Index", "Home");
+                _userService.UpdateUser(user);
+
+                return RedirectToAction("Cabinet", "Account", new { id = user.Id });
+            }
+
+            return View(model);
+        }
+
+        public JsonResult CheckUserName(string Name)
+        {
+            var name = Name;
+            var user = _userService.GetByUserName(Name);
+
+            if (name.ToLower().Contains("admin"))
+            {
+                return Json("Нельзя использовать никнейм со словом Admin", JsonRequestBehavior.AllowGet);
+            }
+
+            if (user != null)
+            {
+                if (user.Id != User.Identity.GetUserId())
+                {
+                    return Json("Данный никнейм уже занят", JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckUserEmail(string Email)
+        {
+            var user = _userService.GetByUserEmail(Email);
+
+            if (user != null)
+            {
+                if (user.Id != User.Identity.GetUserId())
+                {
+                    return Json("Пользователь с таким адресом уже существует", JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

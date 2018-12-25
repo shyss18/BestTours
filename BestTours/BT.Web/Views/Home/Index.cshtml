@@ -1,5 +1,58 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Главная страница";
+    ViewBag.Favicon = "/Content/icons/homePage/favicon.ico";
 }
 
-<h2>@User.Identity.Name</h2>
+<div id="carouselTour" class="carousel slide carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselTour" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselTour" data-slide-to="1"></li>
+        <li data-target="#carouselTour" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/Content/slider/1.jpg" alt="Первый слайд" width="800" height="600" />
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Content/slider/2.jpeg" alt="Второй слайд" width="800" height="600" />
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Content/slider/3.jpg" alt="Третий слайд" width="800" height="600" />
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselTour" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselTour" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+</div>
+<div class="text-center" style="padding-top: 1.5rem;">
+    <h4 id="#about" class="text-info">Best tours</h4>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet pulvinar elit. Nullam vitae nunc orci. Phasellus et dui a tortor semper luctus a maximus lacus. Duis nec eleifend libero. Nullam faucibus, ante at posuere placerat, lectus odio porta lacus, bibendum commodo risus sem a leo. Pellentesque facilisis ante nibh, in placerat enim ornare quis. Integer fringilla accumsan tempus.
+        Quisque diam nisl, dapibus eget nunc eu, bibendum accumsan orci. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada fermentum ligula nec malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec in erat vitae nulla aliquam maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur vehicula libero vel turpis facilisis, sed fermentum dolor eleifend. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse sapien quam, tincidunt eget diam vitae, tristique tincidunt arcu. Mauris leo ex, iaculis id congue quis, imperdiet ac sapien. Quisque suscipit placerat nisi, et suscipit lorem pellentesque vitae.
+        Donec id eros sit amet arcu laoreet faucibus. Duis feugiat nulla efficitur quam auctor suscipit. Morbi sit amet laoreet enim. Praesent nibh libero, condimentum sed mattis interdum, mattis ut justo. Mauris sit amet nibh vulputate purus porttitor placerat et ut elit. Pellentesque velit sem, consectetur ac vulputate et, accumsan eu elit. Vivamus id tortor ipsum. Vivamus ac tristique ex, eget dictum orci. Duis sit amet iaculis nulla. Integer tincidunt vestibulum nisl, at facilisis tellus euismod sit amet. Vivamus non nulla faucibus elit sodales tincidunt sed bibendum lacus. Fusce vel mi dapibus, vulputate metus a, placerat metus. Praesent malesuada consequat augue, quis euismod velit pharetra vel. Phasellus id finibus metus. Vivamus sit amet diam felis. Quisque in venenatis velit, vel tincidunt urna.
+        Donec vitae sem vel dui lacinia finibus ac et elit. Morbi vel tincidunt neque. Fusce mollis quam vitae enim vulputate viverra a nec metus. Nunc porta dapibus aliquam. Ut gravida cursus iaculis. Phasellus eleifend ex et tortor lobortis aliquet vitae in diam. Phasellus faucibus lacus felis. Cras mollis turpis vel elementum egestas. Phasellus pretium hendrerit augue eget consectetur.
+        Ut porta dolor ex, id fermentum ex ultricies semper. Pellentesque aliquam elit ut sapien rutrum placerat. Curabitur id risus a magna sollicitudin porttitor ut sed lectus. Vestibulum ornare nisl sed ullamcorper tristique. Mauris maximus, felis cursus dictum maximus, sem dolor aliquet erat, non posuere nisi ante eget sapien. Etiam dignissim urna vitae cursus luctus. Fusce at nunc nisl. Morbi elementum augue metus, eget venenatis mi volutpat nec. Nullam fermentum diam nec dolor suscipit commodo. In luctus semper eleifend. Donec eu tellus vitae neque viverra aliquet at at est.
+    </div>
+</div>
+<div class="text-center" style="padding-top: 1.5rem;">
+    <h4 id="#contact" class="text-info">Контакты</h4>
+    <div class="col-sm-12 row">
+        <div class="col-sm-6">
+            <div>
+                Контактный телефон: +xxx-(xx)-xxx-xx-xx
+            </div>
+            <div>
+                Email: someemail@mail.com
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div>
+                Адрес: пр-кт Мира 43
+            </div>
+        </div>
+    </div>
+</div>
+

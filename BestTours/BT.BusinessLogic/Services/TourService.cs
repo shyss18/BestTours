@@ -1,42 +1,80 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BT.BusinessLogic.Interface;
 using BT.DataAccess.Interfaces;
 using BT.Dom.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace BT.BusinessLogic.Services
 {
-    public class TourService: ITourService
+    public class TourService : ITourService
     {
-        private readonly ITourRepository _tourRepository;
+        private readonly IUnitOfWork _database;
 
-        public TourService(ITourRepository tourRepository)
+        public TourService(IUnitOfWork database)
         {
-            _tourRepository = tourRepository;
+            _database = database;
         }
 
         public void CreateTour(Tour tour)
         {
-            _tourRepository.CreateTour(tour);
+            _database.TourRepository.CreateTour(tour);
         }
 
         public void DeleteTour(int? id)
         {
-            _tourRepository.DeleteTour(id);
+            _database.TourRepository.DeleteTour(id);
         }
 
         public void EditTour(Tour tour)
         {
-            _tourRepository.EditTour(tour);
+            _database.TourRepository.EditTour(tour);
         }
 
         public Tour GetById(int? id)
         {
-            return _tourRepository.GetById(id);
+            return _database.TourRepository.GetById(id);
+        }
+
+        public IEnumerable<Tour> FindBy(Func<Tour, bool> predicate)
+        {
+            var tour = _database.TourRepository.FindBy(predicate);
+
+            return tour;
         }
 
         public IEnumerable<Tour> GetAll()
         {
-            return _tourRepository.GetAll();
+            return _database.TourRepository.GetAll();
+        }
+
+        public bool BuyTour(Tour tour, string userId)
+        {
+            var user = _database.UserManager.FindByIdAsync(userId).Result;
+
+            if (user.Amount >= tour.Price)
+            {
+                user.Amount = user.Amount - tour.Price;
+                _database.UserManager.Update(user);
+                _database.SaveAsync();
+
+                user.Tours.Add(tour);
+                _database.UserManager.Update(user);
+                _database.SaveAsync();
+
+                tour.Users.Add(user);
+                _database.TourRepository.EditTour(tour);
+                _database.SaveAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Dispose()
+        {
+            _database.Dispose();
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model BT.Dom.Entities.User
+
+@using BT.Dom.Entities
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Туры пользователя " + User.Identity.GetUserName();
+    ViewBag.Favicon = "/Content/icons/homePage/favicon.ico";
+}
+
+<div class="container">
+    <h4 class="text-center text-info">Ваши туры</h4>
+    @if (Model.Tours.Count == 0)
+    {
+        <div class="text-center">
+            <h4 class="text-success">Упс...</h4>
+            <p class="text-info">У вас пока нет покупок(</p>
+            @Html.RouteLink("Посмотреть доступные туры", "AllTours", null, new { @class = "btn btn-outline-info" })
+        </div>
+    }
+    @foreach (Tour tour in Model.Tours)
+    {
+        <div class="form-group">
+            <div class="lead">
+                @tour.Name
+            </div>
+            <br/>
+            @Html.ActionLink("Подробнее", "Details", "Tour", new { id = tour.Id }, new { @class = "btn btn-outline-info" })
+        </div>
+    }
+</div>

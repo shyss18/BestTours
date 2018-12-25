@@ -1,34 +1,53 @@
 ﻿@model BT.Web.Models.LoginModel
 
 @{
-    ViewBag.Title = "Login";
+    Layout = null;
 }
 
-<div class="container">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-group" }))
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Логин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Content/icons/login/favicon.ico" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/signin.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-signin", @novalidate = true }))
     {
         @Html.AntiForgeryToken()
+        <img class="mb-4" src="~/Content/icons/login/login_64.png" alt="" width="64" height="64" />
+        <h1 class="h3 mb-3 font-weight-normal">Логин</h1>
+        @Html.TextBoxFor(m => m.NickName, new
+        {
+            @class = "form-control",
+            @placeholder = @Html.DisplayNameFor(x => x.NickName),
+            @type ="nickname",
+            @autofocus = true,
+            @required = true
+        })
+        @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
 
+        @Html.TextBoxFor(m => m.Password, new
+        {
+            @class = "form-control",
+            @placeholder = @Html.DisplayNameFor(x => x.Password),
+            @required = true,
+            @type = "password"
+        })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group row">
-            @Html.LabelFor(m => m.NickName, "Никнейм", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.NickName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
 
-            </div>
-        </div>
         <div>
-            <input type="submit" class="btn btn-outline-success" value="Войти" />
-            @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-outline-secondary" })
-        </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+            @Html.RouteLink("Отмена", "MainPage", null, new { @class= "btn btn-lg btn-secondary btn-block" })
+            <p class="mt-5 mb-3 text-muted">&copy; @DateTime.Now.Year</p>
+        </div>      
     }
-</div>
 
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

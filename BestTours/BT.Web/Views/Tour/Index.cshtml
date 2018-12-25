@@ -1,23 +1,17 @@
 ﻿@model IEnumerable<BT.Dom.Entities.Tour>
 
 @{
-    ViewBag.Title = "All Tours";
+    ViewBag.Title = "Все туры";
+    ViewBag.Favicon = "/Content/icons/homePage/favicon.ico";
 }
 
 <div class="container">
+    <h4 class="text-center text-info">Туры</h4>
     @foreach (var tour in Model)
     {
         <div class="form-group">
             <div class="lead">
                 @tour.Name
-            </div>
-            <div class="row">
-                <div class="col-sm-2">
-                    Место пребывания:
-                </div>
-                <div class="col-sm-3">
-                    @tour.Destination
-                </div>
             </div>
             <div class="row">
                 <div class="col-sm-2">
@@ -35,12 +29,13 @@
                     @tour.Price
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-sm-2">
-                    <a href="#" class="btn btn-outline-info">Подробнее</a>
+                    @Html.ActionLink("Подробнее", "Details", new { id = tour.Id }, new { @class = "btn btn-outline-info" })
                 </div>
                 <div class="col-sm-2">
-                    <a href="#" class="btn btn-outline-success">Купить</a>
+                    @Html.RouteLink("Купить", "BuyTour", new { id = tour.Id }, new { @class = "btn btn-outline-success" })
                 </div>
                 @if (User.IsInRole("admin"))
                 {
@@ -50,13 +45,12 @@
                             <button type="submit" class="btn btn-outline-warning">Редактировать</button>
                         </div>
                     }
-                    using (Html.BeginForm("DeleteTour", "Tour", new { id = tour.Id }, FormMethod.Get))
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirm">Удалить</button>
+                    </div>
                     {
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn btn-outline-danger">Удалить</button>
-                        </div>
+                        Html.RenderPartial("DeleteConfirm", tour);
                     }
-
                 }
             </div>
         </div>

@@ -1,15 +1,15 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BT.BusinessLogic.Interface;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace BT.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserService UserService
+        private readonly IUserService _userService;
+
+        public HomeController(IUserService userService)
         {
-            get => HttpContext.GetOwinContext().GetUserManager<IUserService>();
+            _userService = userService;
         }
 
         public ActionResult Index()

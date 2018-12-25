@@ -46,8 +46,18 @@ namespace BT.Web
                 );
 
             routes.MapRoute(
+                name: "AllHotels",
+                url: "Hotel/AllHotels"
+            );
+
+            routes.MapRoute(
                 name: "Cabinet",
                 url: "Account/Cabinet"
+                );
+
+            routes.MapRoute(
+                name: "BuyTour",
+                url: "Tour/BuyTour"
                 );
         }
     }

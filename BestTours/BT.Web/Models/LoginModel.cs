@@ -1,14 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BT.Web.Models
-{
-    public class LoginModel
+namespace BT.Web.Models {
+    public class LoginModel 
     {
-        [Required]
+        [Required (ErrorMessage = "Поле не заполнено!")]
+        [Display (Name = "Никнейм")]
         public string NickName { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
+        [Required (ErrorMessage = "Поле не заполнено!")]
+        [DataType (DataType.Password)]
+        [Display (Name = "Пароль")]
         public string Password { get; set; }
     }
 }
