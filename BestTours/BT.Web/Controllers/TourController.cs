@@ -55,6 +55,9 @@ namespace BT.Web.Controllers
         [HttpGet]
         public ActionResult EditTour(int? id)
         {
+            SelectList hotels = new SelectList(_hotelService.GetAll(), "Id", "Name");
+            ViewBag.Hotels = hotels;
+
             if (id == null)
             {
                 return HttpNotFound();
@@ -117,12 +120,19 @@ namespace BT.Web.Controllers
 
             var model = _tourService.GetById(id);
 
-            if (_tourService.BuyTour(model, userId))
+            var modelUser = model.Users.FirstOrDefault(u => u.Id == userId);
+
+            if (modelUser != null)
             {
-                return RedirectToAction("Index");
+                return View("TourThere");             
             }
 
-            return View(model);
+            if (_tourService.BuyTour(model, userId))
+            {
+                return View("BuySucceded");
+            }
+
+            return View("BuyFailed");
         }
 
         [HttpGet]
