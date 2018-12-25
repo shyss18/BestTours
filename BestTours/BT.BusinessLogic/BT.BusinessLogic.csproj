@@ -57,19 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dependency\TourServiceDependency.cs" />
-    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Dependency\BusinessLogicModule.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
-    <Compile Include="Interface\IServiceCreator.cs" />
+    <Compile Include="Interface\IHotelService.cs" />
     <Compile Include="Interface\ITourService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ServiceCreator.cs" />
+    <Compile Include="Services\HotelService.cs" />
     <Compile Include="Services\TourService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

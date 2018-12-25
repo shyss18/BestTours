@@ -22,3 +22,14 @@ D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\Microsoft.AspNet.Identity.Enti
 D:\BestTours\BestTours\BT.BusinessLogic\obj\Debug\BT.BusinessLogic.csproj.CopyComplete
 D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\Ninject.dll
 D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\Ninject.xml
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.Mvc.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.Razor.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.Razor.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.Deployment.dll
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.Mvc.xml
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.Razor.xml
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.Razor.xml
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.xml
+D:\BestTours\BestTours\BT.BusinessLogic\bin\Debug\System.Web.WebPages.Deployment.xml
