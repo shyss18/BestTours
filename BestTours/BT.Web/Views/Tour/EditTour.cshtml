@@ -30,6 +30,21 @@
                 @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
             </div>
             <div class="form-group row">
+                @Html.TextBoxFor(model => model.DayCount, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.DayCount),
+                })
+                @Html.ValidationMessageFor(model => model.DayCount, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.DropDownListFor(m => m.HotelId, @ViewBag.Hotels as SelectList, "Выберите гостиницу", new
+                {
+                    @class = "form-control",
+                })
+                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
                 @Html.TextBoxFor(model => model.Price, new
                 {
                     @class = "form-control",

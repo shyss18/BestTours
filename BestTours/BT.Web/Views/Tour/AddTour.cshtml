@@ -28,11 +28,19 @@
                 @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
             </div>
             <div class="form-group row">
+                @Html.TextBoxFor(model => model.DayCount, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.DayCount),
+                })
+                @Html.ValidationMessageFor(model => model.DayCount, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
                 @Html.DropDownListFor(m => m.HotelId, @ViewBag.Hotels as SelectList, "Выберите гостиницу", new
                 {
                     @class = "form-control",
-                    @required = true
                 })
+                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
             </div>
             <div class="form-group row">
                 @Html.TextBoxFor(model => model.Price, new
@@ -43,14 +51,15 @@
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
             <div class="form-group row">
-                @{Html.EnableClientValidation(false);}
                 @Html.TextBoxFor(model => model.Date, new
                 {
                     @class = "form-control",
-                    @placeholder = Html.DisplayNameFor(model => model.Date),
+                    @placeholder = Html.DisplayNameFor(model => model.Date)
                 })
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                @{Html.EnableClientValidation(true);}
             </div>
             <div class="form-group row">
                 @Html.TextAreaFor(model => model.Description, new
