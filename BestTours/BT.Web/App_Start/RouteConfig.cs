@@ -46,6 +46,11 @@ namespace BT.Web
                 );
 
             routes.MapRoute(
+                name: "AllHotels",
+                url: "Hotel/AllHotels"
+            );
+
+            routes.MapRoute(
                 name: "Cabinet",
                 url: "Account/Cabinet"
                 );
