@@ -6,6 +6,11 @@ namespace BT.DataAccess.Context
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
+        static ApplicationContext()
+        {
+            Database.SetInitializer<ApplicationContext>(new DBInitialize());
+        }
+
         public ApplicationContext(string connectionString) : base(connectionString)
         { }
 
