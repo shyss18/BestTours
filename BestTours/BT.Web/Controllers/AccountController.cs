@@ -180,7 +180,13 @@ namespace BT.Web.Controllers
 
         public JsonResult CheckUserName(string Name)
         {
+            var name = Name;
             var user = _userService.GetByUserName(Name);
+
+            if (name.ToLower().Contains("admin"))
+            {
+                return Json("Нельзя использовать никнейм со словом Admin", JsonRequestBehavior.AllowGet);
+            }
 
             if (user != null)
             {
