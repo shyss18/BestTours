@@ -2,19 +2,20 @@
 
 @{
     ViewBag.Title = "Подробнее о гостинице " + Model.Name;
+    ViewBag.Favicon = "/Content/icons/details/favicon.ico";
 }
 
 <div class="container row">
     <div class="col-md-6">
         <h4 class="text-info">Информация о гостинице:</h4>
         <div class="form-group row">
-            @Html.LabelFor(m => m.Name, "Название гостиницы:", new { @class = "col-sm-5 col-form-label" })
+            @Html.LabelFor(m => m.Name, "Название гостиницы:", new { @class = "col-sm-4 col-form-label" })
             <div class="col-sm-2 col-form-label">
                 @Html.DisplayTextFor(m => m.Name)
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(m => m.Address, "Адрес:", new { @class = "col-sm-2 col-form-label" })
+            @Html.LabelFor(m => m.Address, "Адрес:", new { @class = "col-sm-4 col-form-label" })
             <div class="col-sm-5 col-form-label">
                 @Html.DisplayTextFor(m => m.Address)
             </div>
@@ -25,14 +26,17 @@
                 @Html.DisplayTextFor(m => m.Phone)
             </div>
         </div>
+        <div class="container">
+            @Html.RouteLink("Назад", "AllHotels", null, new { @class = "btn btn-outline-secondary" })
+        </div>
     </div>
     @if (User.IsInRole("admin"))
     {
-        <div class="col-md-6" style="padding-top: 10%" align="right">
+        <div class="col-md-6" style="padding-top: 10%" align="center">
             @Html.ActionLink("Редактировать отель", "EditHotel", new { id = Model.Id }, new { @class = "btn btn-outline-warning" })
             <br />
             <br />
-            <button type="button" class="btn btn-outline-danger col-sm-3" data-toggle="modal" data-target="#deleteConfirm">Удалить</button>
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteConfirm">Удалить</button>
 
             @{ Html.RenderPartial("DeleteConfirmHotel", Model); }
         </div>
