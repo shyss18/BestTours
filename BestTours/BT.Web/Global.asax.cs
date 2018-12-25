@@ -18,11 +18,10 @@ namespace BT.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule serviceModule = new ServiceModule();
-            NinjectModule repositoryModule = new RepositoryModule();
-            IKernel kernel = new StandardKernel(serviceModule, repositoryModule);
+            NinjectModule dataAccessModule = new DataAccessModule();
+            NinjectModule businessLogicModule = new BusinessLogicModule();
+            IKernel kernel = new StandardKernel(dataAccessModule, businessLogicModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
-
         }
     }
 }

@@ -1,46 +1,80 @@
 ﻿@model BT.Dom.Entities.Tour
 
 @{
-    ViewBag.Title = "EditTour";
+    ViewBag.Title = "Изменить тур";
+    ViewBag.Favicon = "/Content/icons/editTour/favicon.ico";
 }
 
-<div class="container">
-    @using (Html.BeginForm("EditTour", "Tour", FormMethod.Post, new { @class = "form-group" }))
-    {
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Name, "Название тура", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Destination, "Путь назначения", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Destination, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Price, "Цена", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Date, "Дата отправления", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(m => m.Description, "Описание", new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-3">
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-outline-warning col-sm-2 col-md-2" value="Изменить" />
-            <a href="~/Tour/Index" class="btn btn-outline-secondary col-sm-2 col-md-2">Отмена</a>
-        </div>
-    }
-</div>
+<div class="container" align="center">
+    <div class="col-md-5">
+        <h4 class="text-center text-warning" style="padding-top: 10%">Редактирование тура</h4>
+        @using (Html.BeginForm("EditTour", "Tour", FormMethod.Post, new { @class = "form-group" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+            @Html.AntiForgeryToken()
 
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Name, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Name),
+                })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Destination, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Destination),
+                })
+                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.DayCount, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.DayCount),
+                })
+                @Html.ValidationMessageFor(model => model.DayCount, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.DropDownListFor(m => m.HotelId, @ViewBag.Hotels as SelectList, "Выберите гостиницу", new
+                {
+                    @class = "form-control",
+                })
+                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Price, new
+                {
+                    @class = "form-control",
+                    @type = "number",
+                    @placeholder = Html.DisplayNameFor(model => model.Price),
+                })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @{Html.EnableClientValidation(false);}
+                @Html.TextBoxFor(model => model.Date, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Date),
+                })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                @{Html.EnableClientValidation(true);}
+            </div>
+            <div class="form-group row">
+                @Html.TextAreaFor(model => model.Description, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Description),
+                })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="container">
+                <input type="submit" class="btn btn-outline-warning" value="Изменить" />
+                <a href="~/Tour/Index" class="btn btn-outline-secondary">Отмена</a>
+            </div>
+        }
+    </div>
+</div>

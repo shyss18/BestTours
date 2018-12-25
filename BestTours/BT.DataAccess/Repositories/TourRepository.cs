@@ -8,13 +8,13 @@ using BT.DataAccess.Context;
 
 namespace BT.DataAccess.Repositories
 {
-    public class TourRepository : ITourRepository, IDisposable
+    public class TourRepository : ITourRepository
     {
-        private TourContext _dataBase;
+        private ApplicationContext _dataBase;
 
-        public TourRepository()
+        public TourRepository(ApplicationContext dataBase)
         {
-            _dataBase = new TourContext("IdentityDb");
+            _dataBase = dataBase;
         }
 
         public void CreateTour(Tour tour)
@@ -39,14 +39,21 @@ namespace BT.DataAccess.Repositories
 
         public Tour GetById(int? id)
         {
-            var tour = _dataBase.Tours.Where(m => m.Id == id).Select(m => m).FirstOrDefault();
+            var tour = _dataBase.Tours.Include(t => t.Hotel).FirstOrDefault(t => t.Id == id);
+
+            return tour;
+        }
+
+        public IEnumerable<Tour> FindBy(Func<Tour, bool> predicate)
+        {
+            var tour = _dataBase.Tours.Where(predicate).Select(m => m);
 
             return tour;
         }
 
         public IEnumerable<Tour> GetAll()
         {
-            return _dataBase.Tours.ToList();
+            return _dataBase.Tours.Include(t => t.Hotel);
         }
 
         public void Dispose()

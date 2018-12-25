@@ -1,15 +1,17 @@
-﻿@using System.Data.Entity.Core.Mapping
-@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@ViewBag.Favicon" type="image/x-icon" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-light">
         @Html.RouteLink("Best tours", "MainPage", "Home", new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,10 +21,22 @@
                 <li class="nav-item">
                     @Html.RouteLink("Туры", "AllTours", null, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Гостиницы", "AllHotels", "Hotel", null, new { @class = "nav-link" })
+                </li>
                 @if (User.IsInRole("admin"))
                 {
                     <li class="nav-item">
                         @Html.RouteLink("Добавить тур", "AddTour", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Добавить отель", "CreateHotel", "Hotel", null, new { @class = "nav-link" })
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Ваши туры", "ToursCurrentUser", "Tour", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                     </li>
                 }
                 <li class="nav-item">
@@ -45,7 +59,7 @@
                 else
                 {
                     <li class="nav-item">
-                        @Html.RouteLink("Добро пожаловать, " + @User.Identity.Name, "Cabinet", new { name = User.Identity.GetUserName() }, new { @class = "nav-link" })
+                        @Html.RouteLink("Добро пожаловать, " + @User.Identity.GetUserName(), "Cabinet", new { id = User.Identity.GetUserId() }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.RouteLink("Выход", "Logout", "Account", new { @class = "btn btn-outline-danger my-2 my-sm-0" })
@@ -54,14 +68,31 @@
             </ul>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <div class="container-fluid body-content wrapper">
+        <div class="content">
+            @RenderBody()
+        </div>
     </div>
-    <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-unstyled list-inline social text-center">
+                        <li class="list-inline-item"><a href="https://vk.com/dividedbyinfinity"><i class="fab fa-vk"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/_shyss18/"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="https://plus.google.com/u/0/106152068114520058662?tab=mX"><i class="fab fa-google-plus-g"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 text-center text-white">
+                <p class="h6">&copy @DateTime.Now.Year<a class="text-white ml-2" href="~/Views/Home/Index.cshtml">Best tours</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
