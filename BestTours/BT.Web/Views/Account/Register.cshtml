@@ -1,0 +1,88 @@
+﻿@model BT.Web.Models.RegisterModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="~/Content/icons/registrations/favicon.ico" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/register.css" rel="stylesheet" />
+</head>
+<body class="text-center">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-register", @novalidate = true }))
+    {
+        @Html.AntiForgeryToken()
+        <img class="mb-4" src="~/Content/icons/login/login_64.png" alt="" width="64" height="64" />
+        <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+
+        @Html.TextBoxFor(model => model.FirstName, new
+   {
+       @class = "form-control",
+       @autofocus = true,
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model => model.FirstName),
+   })
+        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(model=>model.LastName, new
+   {
+       @class="form-control",
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model=>model.LastName),
+   })
+        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(model=>model.Name, new
+   {
+       @class="form-control",
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model=>model.Name),
+   })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(model => model.Email, new
+   {
+       @class="form-control",
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model=>model.Email),
+   })
+        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.Password, new
+   {
+       @class = "form-control",
+       @type = "password",
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model=>model.Password),
+   })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.ConfirmPassword, new
+   {
+       @class = "form-control",
+       @type = "password",
+       @required = true,
+       @placeholder = Html.DisplayNameFor(model => model.ConfirmPassword),
+   })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Регистрация</button>
+            @Html.RouteLink("Отмена", "MainPage", null, new { @class = "btn btn-lg btn-secondary btn-block" })
+            <p class="mt-5 mb-3 text-muted">&copy; @DateTime.Now.Year</p>
+        </div>
+    }
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+

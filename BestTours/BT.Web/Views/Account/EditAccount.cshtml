@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+@model BT.Web.Models.AccountModel
+
+@{
+    ViewBag.Title = "Редактирование пользователя";
+    ViewBag.Favicon = "/Content/icons/editUser/favicon.ico";
+}
+
+<div class="container" align="center">
+    <div class="col-md-3">
+        <h4 class="text-info">Редактирования пользователя:</h4>
+        @using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { @class = "form-group", @novalidate = true }))
+        {
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.FirstName, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.FirstName),
+                })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.LastName, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.LastName),
+                })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Email, new
+                {
+                    @class = "form-control",
+                    @placeholder = Html.DisplayNameFor(model => model.Email),
+                })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Amount, "Старое количество валюты:")   
+                @Html.DisplayTextFor(m => m.Amount)
+            </div>
+            <div class="form-group row">
+                @Html.TextBoxFor(model => model.Amount, new
+                {
+                    @class = "form-control",
+                    @type ="number",
+                    @placeholder = Html.DisplayNameFor(model => model.Amount),
+                })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+            <div class="container">
+                <input type="submit" class="btn btn-outline-warning" value="Изменить" />
+                @Html.RouteLink("Отмена", "Cabinet", new { id = User.Identity.GetUserId() }, new { @class = "btn btn-outline-secondary " })
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model BT.Dom.Entities.Tour
+<div class="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Подтверждение удаления</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center text-danger">
+                    Вы действительно хотите удалить тур?
+                    <p>@Model.Name</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Закрыть</button>
+                @using (Html.BeginForm("DeleteTour", "Tour", new { id = Model.Id }, FormMethod.Post))
+                {
+                    <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
